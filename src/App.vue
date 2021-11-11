@@ -1,14 +1,25 @@
 <template>
-  <div id="app">
+  <div class="container">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Список валют</router-link> |
+      <router-link to="/converter">Конвертер</router-link>
     </div>
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
-<style>
+<script>
+import store from "./store/index";
+export default {
+  async created() {
+    await store.dispatch("loadCurrencies");
+  },
+};
+</script>
+
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
